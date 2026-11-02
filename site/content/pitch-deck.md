@@ -4,7 +4,19 @@ order: 3
 ---
 # Brand Partnership Pitch Deck
 
-The 17-slide sponsor deck lives in Claude: **[Blind Sight — Brand Partnership Deck](https://claude.ai/artifact/D2cMbr497JqD8n7pVLy99j)**. It's private until shared, and it can be exported to PDF or PowerPoint from its Share menu. Put an exported PDF in `site/downloads/` to make it downloadable here.
+<div class="resource-card">
+  <div>
+    <p class="eyebrow">Sales resource · 17 slides</p>
+    <h3>Blind Sight — Brand Partnership Deck</h3>
+    <p>Use this page as the printable, browser-based deck when presenting the sponsorship program. The editable source artifact is available in Claude, where it can be exported to PDF or PowerPoint.</p>
+  </div>
+  <div class="resource-actions">
+    <a class="resource-button" href="https://claude.ai/artifact/D2cMbr497JqD8n7pVLy99j" target="_blank" rel="noreferrer">Open source deck ↗</a>
+    <button class="resource-button secondary" type="button" onclick="window.print()">Print / Save PDF</button>
+  </div>
+</div>
+
+**Before sending:** fill in the launch date and creator numbers, and replace the drawn prop sketches with an in-engine branded-can capture when the vertical slice is ready.
 
 | # | Slide | What it says |
 | --- | --- | --- |
@@ -25,5 +37,3 @@ The 17-slide sponsor deck lives in Claude: **[Blind Sight — Brand Partnership 
 | 15 | Close | Let's make some noise. Founding partner slots open until the Steam launch |
 | A | Appendix | Meccha Chameleon sales: 2M by day 5, 15M by ~day 26, 20M+ by day 63 |
 | B | Appendix | In-game ad benchmarks: recall, purchase consideration, attention CPM |
-
-**Before sending:** fill in the launch date and the creator numbers, and replace the drawn prop sketches with an in-engine branded-can capture when the vertical slice is ready.

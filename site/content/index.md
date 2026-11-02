@@ -17,7 +17,7 @@ Blind Sight is a 4–8 player asymmetric horror-comedy for PC (Steam). A nearly 
 | If you need to… | Go to |
 | --- | --- |
 | Quote a brand | [Rate Card](rate-card.html) · [Rate card spreadsheet](downloads.html) |
-| Pitch a brand | [Pitch Deck](pitch-deck.html) · [RFP & Brand Brief](rfp-brand-brief.html) · [Sponsor Term Sheet](sponsor-term-sheet.html) |
+| Pitch a brand | [Pitch Deck resource](pitch-deck.html) · [RFP & Brand Brief](rfp-brand-brief.html) · [Sponsor Term Sheet](sponsor-term-sheet.html) |
 | Close a deal | [Master Sponsorship Agreement](master-sponsorship-agreement.html) · [Order Form & SOW](order-form-sow.html) · [SLA](sla.html) · [Creative & Asset Guidelines](creative-guidelines.html) |
 | Get the team's paperwork in order | [Contributor IP Term Sheet](contributor-ip-term-sheet.html) · [Creator LOI](creator-loi.html) |
 | Build placements in Unreal | [Sponsor-Slot Tech Spec](sponsor-slot-tech-spec.html) |
