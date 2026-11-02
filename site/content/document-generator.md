@@ -6,6 +6,8 @@ order: 0
 
 Create a working draft of an SLA, RFP & Brand Brief, or SOW / Order Form without editing the source documents. Everything runs in this browser: nothing is uploaded or saved to a server. Review all generated documents with counsel before sending.
 
+<p><a class="crm-link" id="open-crm" href="https://kato-8-crm.vercel.app/" target="_blank" rel="noreferrer">Open shared Kato.8 CRM ↗</a> <span class="helper">Pass the sponsor details into the shared pipeline without leaving this tool.</span></p>
+
 <div class="generator" id="document-generator">
   <section class="generator-panel" aria-label="Document fields">
     <h2>Deal details</h2>
@@ -101,6 +103,7 @@ Create a working draft of an SLA, RFP & Brand Brief, or SOW / Order Form without
   var lineItems = document.getElementById("line-items");
   var preview = document.getElementById("document-preview");
   var sowFields = document.getElementById("sow-fields");
+  var crmLink = document.getElementById("open-crm");
 
   function escapeHtml(text) {
     return String(text).replace(/[&<>"']/g, function (character) {
@@ -195,6 +198,15 @@ Create a working draft of an SLA, RFP & Brand Brief, or SOW / Order Form without
     var type = fields["document-type"].value;
     sowFields.style.display = type === "sow" ? "block" : "none";
     preview.innerHTML = type === "sla" ? renderSla() : type === "rfp" ? renderRfp() : renderSow();
+    var crmParams = new URLSearchParams({
+      company: fields["company-name"].value.trim(),
+      contact: fields["contact-name"].value.trim(),
+      email: fields["contact-email"].value.trim(),
+      value: fields["price-agreement"].value.trim().replace(/[^0-9.]/g, ""),
+      scope: fields["placements"].value.trim(),
+      source: "blind-sight-ads"
+    });
+    crmLink.href = "https://kato-8-crm.vercel.app/?" + crmParams.toString();
   }
   ids.forEach(function (id) { fields[id].addEventListener("input", update); fields[id].addEventListener("change", update); });
   document.getElementById("add-line").addEventListener("click", function () { addLine(); update(); });
