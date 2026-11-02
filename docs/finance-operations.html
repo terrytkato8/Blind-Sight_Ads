@@ -81,6 +81,35 @@
   .resource-actions { display:flex; flex-wrap:wrap; gap:8px; flex-shrink:0; }
   .resource-button { display:inline-block; border:0; border-radius:7px; padding:9px 12px; background:var(--acid); color:var(--dark); font:600 14px Rubik,Arial,sans-serif; text-decoration:none; cursor:pointer; }
   .resource-button.secondary { background:#E8E4D8; }
+  .ad-planner { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px; margin:20px 0 30px; }
+  .planner-controls { background:#F2EFE6; border-radius:10px; padding:16px; }
+  .planner-control-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:0 12px; }
+  .planner-controls .field label { display:block; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px; }
+  .planner-controls select { width:100%; border:1px solid #C7C1B5; border-radius:6px; background:#fff; font:inherit; padding:8px; }
+  .planner-helper { color:var(--muted); font-size:12px; margin:10px 0 0; }
+  .planner-results { display:flex; gap:18px; align-items:center; margin:18px 0; }
+  .quote-total { flex:0 0 230px; background:var(--dark); border-radius:10px; color:var(--light); padding:14px; }
+  .quote-total span, .quote-total strong, .quote-total small { display:block; }
+  .quote-total span { color:var(--muted-dark); font-size:11px; text-transform:uppercase; letter-spacing:1px; }
+  .quote-total strong { color:var(--acid); font:600 30px Oswald,Arial,sans-serif; }
+  .quote-total small { color:#D6D4CC; font-size:11px; }
+  .quote-breakdown { flex:1; display:grid; grid-template-columns:repeat(2, 1fr); gap:7px 14px; }
+  .quote-breakdown div { display:flex; justify-content:space-between; gap:8px; border-bottom:1px solid var(--rule); padding:5px 0; font-size:13px; }
+  .planner-placement-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:18px 0 24px; }
+  .placement-choice { display:block; position:relative; border:1px solid var(--rule); border-radius:9px; background:#fff; padding:12px; cursor:pointer; }
+  .placement-choice:hover, .placement-choice.selected { border-color:var(--orange); box-shadow:0 0 0 2px #F2D5CB; }
+  .placement-choice input { float:right; accent-color:var(--orange); width:17px; height:17px; }
+  .placement-choice-name, .placement-choice-rate, .placement-choice-desc { display:block; }
+  .placement-choice-name { font-weight:600; }
+  .placement-choice-rate { color:var(--orange); font-size:13px; margin-top:3px; }
+  .placement-choice-desc { color:var(--muted); font-size:11px; margin-top:6px; line-height:1.4; }
+  .asset-matrix-wrap { border-top:2px solid var(--rule); padding-top:12px; }
+  .asset-matrix-wrap h3 { margin:0 0 5px; }
+  .asset-matrix { font-size:13px; }
+  .planner-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .planner-actions button, .planner-crm-link { border:0; border-radius:7px; padding:9px 12px; background:var(--dark); color:var(--light); font:600 14px Rubik,Arial,sans-serif; cursor:pointer; text-decoration:none; }
+  .planner-actions .secondary { background:#E8E4D8; color:var(--dark); }
+  .planner-crm-link { background:var(--orange); }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .crm-toolbar { display:flex; gap:12px; justify-content:space-between; align-items:center; margin:18px 0; }
   .crm-toolbar > div:first-child { flex:1; max-width:420px; }
@@ -121,6 +150,7 @@
     .crm-layout { grid-template-columns:1fr; }
     .resource-card { display:block; }
     .resource-actions { margin-top:14px; }
+    .planner-control-grid, .planner-placement-grid { grid-template-columns:1fr 1fr; }
   }
   @media (max-width: 900px) {
     .layout { grid-template-columns:1fr; }
@@ -139,6 +169,8 @@
       .preview-panel { border:0; padding:0; }
       .document-preview { border:0; padding:0; min-height:0; }
       .crm-toolbar, .crm-summary, .crm-layout { display:none; }
+      .ad-planner { border:0; padding:0; }
+      .planner-actions, .planner-controls, .planner-placement-grid { display:none; }
     }
 </style>
 </head>

@@ -81,6 +81,35 @@
   .resource-actions { display:flex; flex-wrap:wrap; gap:8px; flex-shrink:0; }
   .resource-button { display:inline-block; border:0; border-radius:7px; padding:9px 12px; background:var(--acid); color:var(--dark); font:600 14px Rubik,Arial,sans-serif; text-decoration:none; cursor:pointer; }
   .resource-button.secondary { background:#E8E4D8; }
+  .ad-planner { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px; margin:20px 0 30px; }
+  .planner-controls { background:#F2EFE6; border-radius:10px; padding:16px; }
+  .planner-control-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:0 12px; }
+  .planner-controls .field label { display:block; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:5px; }
+  .planner-controls select { width:100%; border:1px solid #C7C1B5; border-radius:6px; background:#fff; font:inherit; padding:8px; }
+  .planner-helper { color:var(--muted); font-size:12px; margin:10px 0 0; }
+  .planner-results { display:flex; gap:18px; align-items:center; margin:18px 0; }
+  .quote-total { flex:0 0 230px; background:var(--dark); border-radius:10px; color:var(--light); padding:14px; }
+  .quote-total span, .quote-total strong, .quote-total small { display:block; }
+  .quote-total span { color:var(--muted-dark); font-size:11px; text-transform:uppercase; letter-spacing:1px; }
+  .quote-total strong { color:var(--acid); font:600 30px Oswald,Arial,sans-serif; }
+  .quote-total small { color:#D6D4CC; font-size:11px; }
+  .quote-breakdown { flex:1; display:grid; grid-template-columns:repeat(2, 1fr); gap:7px 14px; }
+  .quote-breakdown div { display:flex; justify-content:space-between; gap:8px; border-bottom:1px solid var(--rule); padding:5px 0; font-size:13px; }
+  .planner-placement-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:18px 0 24px; }
+  .placement-choice { display:block; position:relative; border:1px solid var(--rule); border-radius:9px; background:#fff; padding:12px; cursor:pointer; }
+  .placement-choice:hover, .placement-choice.selected { border-color:var(--orange); box-shadow:0 0 0 2px #F2D5CB; }
+  .placement-choice input { float:right; accent-color:var(--orange); width:17px; height:17px; }
+  .placement-choice-name, .placement-choice-rate, .placement-choice-desc { display:block; }
+  .placement-choice-name { font-weight:600; }
+  .placement-choice-rate { color:var(--orange); font-size:13px; margin-top:3px; }
+  .placement-choice-desc { color:var(--muted); font-size:11px; margin-top:6px; line-height:1.4; }
+  .asset-matrix-wrap { border-top:2px solid var(--rule); padding-top:12px; }
+  .asset-matrix-wrap h3 { margin:0 0 5px; }
+  .asset-matrix { font-size:13px; }
+  .planner-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .planner-actions button, .planner-crm-link { border:0; border-radius:7px; padding:9px 12px; background:var(--dark); color:var(--light); font:600 14px Rubik,Arial,sans-serif; cursor:pointer; text-decoration:none; }
+  .planner-actions .secondary { background:#E8E4D8; color:var(--dark); }
+  .planner-crm-link { background:var(--orange); }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .crm-toolbar { display:flex; gap:12px; justify-content:space-between; align-items:center; margin:18px 0; }
   .crm-toolbar > div:first-child { flex:1; max-width:420px; }
@@ -121,6 +150,7 @@
     .crm-layout { grid-template-columns:1fr; }
     .resource-card { display:block; }
     .resource-actions { margin-top:14px; }
+    .planner-control-grid, .planner-placement-grid { grid-template-columns:1fr 1fr; }
   }
   @media (max-width: 900px) {
     .layout { grid-template-columns:1fr; }
@@ -139,6 +169,8 @@
       .preview-panel { border:0; padding:0; }
       .document-preview { border:0; padding:0; min-height:0; }
       .crm-toolbar, .crm-summary, .crm-layout { display:none; }
+      .ad-planner { border:0; padding:0; }
+      .planner-actions, .planner-controls, .planner-placement-grid { display:none; }
     }
 </style>
 </head>
@@ -187,6 +219,93 @@
 <p>Blind Sight sells placements as <strong>flat-fee, fixed-term sponsorships</strong> priced by tier, from $1,500 for a poster to $40,000 for an interactive hero prop, plus a small one-time implementation fee per placement. Flat fee is the standard model for static in-game placements, and the price follows how prominent the placement is and how big the game's audience is expected to be (<a href="https://rapidfire.com/blog/in-game-advertising-pricing-and-costs">RapidFire</a>).</p>
 <p>What Blind Sight can sell that other games can't: <strong>sound is a placement surface.</strong> Hiders throw branded cans, branded jukeboxes act as noise lures, and the Hunter learns to recognize a brand's audio sting by ear. In most games a logo is set dressing. Here it can be part of the gameplay.</p>
 <p>Price = <strong>base tier rate × term × reach (maps) × exclusivity × audience index</strong>, minus a founding-partner discount before launch, plus the flat implementation fee.</p>
+<h2 id="client-placement-planner-quote-calculator">Client placement planner &amp; quote calculator</h2>
+<p>Use this planner to map the client's campaign into an in-game advertising package. Select every placement they want, then adjust the commercial levers. The estimate uses the midpoint of each rate range and is intended for scoping; the final quote follows the signed Order Form.</p>
+<div class="ad-planner" id="ad-planner">
+  <div class="planner-controls">
+    <div class="planner-control-grid">
+      <div class="field"><label for="planner-term">Term</label><select id="planner-term"><option value="0.6">6 months</option><option value="1" selected>12 months</option><option value="1.7">24 months</option><option value="2.5">Permanent</option></select></div>
+      <div class="field"><label for="planner-maps">Maps</label><select id="planner-maps"><option value="1">1 map</option><option value="2">2 maps</option><option value="3">3 maps</option><option value="4">4 maps</option></select></div>
+      <div class="field"><label for="planner-audience">Audience index</label><select id="planner-audience"><option value="0.7">Under 25k players</option><option value="1" selected>25k–100k players</option><option value="2">100k–500k players</option><option value="custom">500k+ · custom</option></select></div>
+      <div class="field"><label for="planner-exclusive">Category exclusive?</label><select id="planner-exclusive"><option value="1">No</option><option value="1.35">Yes · 1.35×</option></select></div>
+      <div class="field"><label for="planner-premium">Premium spot?</label><select id="planner-premium"><option value="1">No</option><option value="1.25">Yes · 1.25×</option></select></div>
+      <div class="field"><label for="planner-founding">Founding partner?</label><select id="planner-founding"><option value="1">No</option><option value="0.7">Yes · 30% off</option></select></div>
+    </div>
+    <p class="planner-helper">Permanent placements are available before launch for tiers 1–5. Title sponsorship cannot be permanent. Additional maps add 0.6× per map for tiers 1–3 and 5.</p>
+  </div>
+  <div class="planner-results">
+    <div class="quote-total"><span>Estimated campaign total</span><strong id="planner-total">$0</strong><small id="planner-range">Select a placement to begin</small></div>
+    <div class="quote-breakdown" id="planner-breakdown"></div>
+  </div>
+  <div class="planner-placement-grid" id="planner-placement-grid"></div>
+  <div class="asset-matrix-wrap">
+    <h3>Client asset &amp; production matrix</h3>
+    <p class="planner-helper">Share this matrix with the client to identify what they can supply and what Kato.8 should produce.</p>
+    <div class="table-wrap"><table class="asset-matrix"><thead><tr><th>Selected placement</th><th>Client supplies</th><th>Kato.8 produces</th><th>Client approvals</th></tr></thead><tbody id="asset-matrix-body"></tbody></table></div></div>
+  </div>
+  <div class="planner-actions"><button type="button" id="planner-print">Print / Save PDF</button><button type="button" class="secondary" id="planner-copy">Copy campaign brief</button><a class="planner-crm-link" id="planner-crm" href="https://kato-8-crm.vercel.app/" target="_blank" rel="noreferrer">Open in CRM ↗</a></div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var planner = document.getElementById("ad-planner");
+  if (!planner) return;
+  var placements = [
+    {id:"poster", tier:1, name:"Poster / decal", low:1500, high:3000, impl:350, assets:"Logo/vector art, brand colors, legal line", output:"Art adaptation and up to 3 placed instances", approvals:"2 approval rounds"},
+    {id:"video", tier:2, name:"Video screen", low:3000, high:6000, impl:500, assets:"15–30s video, optional audio, captions", output:"Reformatted loop and screen setup", approvals:"Video and audio approval"},
+    {id:"set", tier:3, name:"Branded set-dressing prop", low:5000, high:10000, impl:750, assets:"Logo, product photos, dimensions, materials", output:"3D model, textures, up to 10 instances", approvals:"Model, textures, placement"},
+    {id:"throwable", tier:4, name:"Branded throwable", low:12000, high:25000, impl:1500, assets:"Product references, logo, impact/audio direction", output:"Model, physics, impact sound, gameplay QA", approvals:"Model, sound, gameplay parity"},
+    {id:"hero", tier:5, name:"Interactive hero prop", low:20000, high:40000, impl:2500, assets:"Product references, logo, audio sting, interaction direction", output:"Interactive model, Blueprint, animation, MetaSound", approvals:"Concept, interaction, audio, QA"},
+    {id:"title", tier:6, name:"Title sponsor", low:5000, high:12000, impl:250, assets:"Logo package, brand line, legal approval", output:"Loading-screen UI and logo swap", approvals:"Final loading-screen treatment"}
+  ];
+  var selected = {};
+  var controls = ["planner-term", "planner-maps", "planner-audience", "planner-exclusive", "planner-premium", "planner-founding"];
+  function money(n) { return n.toLocaleString(undefined, {style:"currency", currency:"USD", maximumFractionDigits:0}); }
+  function get(id) { return document.getElementById(id).value; }
+  function activePlacements() { return placements.filter(function (p) { return selected[p.id]; }); }
+  function renderCards() {
+    document.getElementById("planner-placement-grid").innerHTML = placements.map(function (p) {
+      return '<label class="placement-choice' + (selected[p.id] ? ' selected' : '') + '"><input type="checkbox" data-placement="' + p.id + '"' + (selected[p.id] ? ' checked' : '') + '><span class="placement-choice-name">' + p.name + '</span><span class="placement-choice-rate">' + money(p.low) + '–' + money(p.high) + '</span><span class="placement-choice-desc">' + p.assets + '</span></label>';
+    }).join("");
+    planner.querySelectorAll("[data-placement]").forEach(function (input) {
+      input.addEventListener("change", function () { selected[input.dataset.placement] = input.checked; render(); });
+    });
+  }
+  function render() {
+    renderCards();
+    var maps = Number(get("planner-maps"));
+    var term = Number(get("planner-term"));
+    var audience = get("planner-audience") === "custom" ? 1 : Number(get("planner-audience"));
+    var exclusive = Number(get("planner-exclusive"));
+    var premium = Number(get("planner-premium"));
+    var founding = Number(get("planner-founding"));
+    var low = 0, high = 0, impl = 0;
+    activePlacements().forEach(function (p) {
+      var reach = (p.tier === 4 || p.tier === 6) ? 1 : 1 + ((maps - 1) * 0.6);
+      var placementMultiplier = p.tier === 6 ? 1 : exclusive * premium;
+      var campaignLow = p.low * term * reach * placementMultiplier * audience * founding;
+      var campaignHigh = p.high * term * reach * placementMultiplier * audience * founding;
+      low += campaignLow; high += campaignHigh; impl += p.impl;
+    });
+    var totalLow = low + impl, totalHigh = high + impl;
+    document.getElementById("planner-total").textContent = activePlacements().length ? money((totalLow + totalHigh) / 2) : "$0";
+    document.getElementById("planner-range").textContent = activePlacements().length ? money(totalLow) + "–" + money(totalHigh) + " including " + money(impl) + " implementation" : "Select a placement to begin";
+    document.getElementById("planner-breakdown").innerHTML = activePlacements().map(function (p) { return "<div><span>" + p.name + "</span><strong>" + money((p.low + p.high) / 2 * term * ((p.tier === 4 || p.tier === 6) ? 1 : 1 + ((maps - 1) * 0.6)) * (p.tier === 6 ? 1 : exclusive * premium) * audience * founding) + "</strong></div>"; }).join("");
+    document.getElementById("asset-matrix-body").innerHTML = activePlacements().length ? activePlacements().map(function (p) { return "<tr><td><strong>" + p.name + "</strong></td><td>" + p.assets + "</td><td>" + p.output + "</td><td>" + p.approvals + "</td></tr>"; }).join("") : '<tr><td colspan="4">Select placements above to build the client asset matrix.</td></tr>';
+    var crm = new URLSearchParams({scope:activePlacements().map(function (p) { return p.name; }).join(", "), value: activePlacements().length ? String(Math.round((totalLow + totalHigh) / 2)) : "", source:"blind-sight-rate-card"});
+    document.getElementById("planner-crm").href = "https://kato-8-crm.vercel.app/?" + crm.toString();
+  }
+  controls.forEach(function (id) { document.getElementById(id).addEventListener("change", render); });
+  document.getElementById("planner-print").addEventListener("click", function () { window.print(); });
+  document.getElementById("planner-copy").addEventListener("click", async function () {
+    var brief = "Blind Sight campaign brief\nPlacements: " + activePlacements().map(function (p) { return p.name; }).join(", ") + "\nEstimated total: " + document.getElementById("planner-total").textContent + "\nRange: " + document.getElementById("planner-range").textContent + "\nClient assets: " + activePlacements().map(function (p) { return p.assets; }).join("; ");
+    try { await navigator.clipboard.writeText(brief); this.textContent = "Copied"; setTimeout(function () { document.getElementById("planner-copy").textContent = "Copy campaign brief"; }, 1600); } catch (error) { window.alert(brief); }
+  });
+  render();
+}());
+</script>
+
 <h2 id="placement-inventory-tiers">Placement inventory &amp; tiers</h2>
 <div class="table-wrap"><table>
 <thead>

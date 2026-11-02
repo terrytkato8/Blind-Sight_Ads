@@ -12,6 +12,95 @@ What Blind Sight can sell that other games can't: **sound is a placement surface
 
 Price = **base tier rate × term × reach (maps) × exclusivity × audience index**, minus a founding-partner discount before launch, plus the flat implementation fee.
 
+## Client placement planner & quote calculator
+
+Use this planner to map the client's campaign into an in-game advertising package. Select every placement they want, then adjust the commercial levers. The estimate uses the midpoint of each rate range and is intended for scoping; the final quote follows the signed Order Form.
+
+<div class="ad-planner" id="ad-planner">
+  <div class="planner-controls">
+    <div class="planner-control-grid">
+      <div class="field"><label for="planner-term">Term</label><select id="planner-term"><option value="0.6">6 months</option><option value="1" selected>12 months</option><option value="1.7">24 months</option><option value="2.5">Permanent</option></select></div>
+      <div class="field"><label for="planner-maps">Maps</label><select id="planner-maps"><option value="1">1 map</option><option value="2">2 maps</option><option value="3">3 maps</option><option value="4">4 maps</option></select></div>
+      <div class="field"><label for="planner-audience">Audience index</label><select id="planner-audience"><option value="0.7">Under 25k players</option><option value="1" selected>25k–100k players</option><option value="2">100k–500k players</option><option value="custom">500k+ · custom</option></select></div>
+      <div class="field"><label for="planner-exclusive">Category exclusive?</label><select id="planner-exclusive"><option value="1">No</option><option value="1.35">Yes · 1.35×</option></select></div>
+      <div class="field"><label for="planner-premium">Premium spot?</label><select id="planner-premium"><option value="1">No</option><option value="1.25">Yes · 1.25×</option></select></div>
+      <div class="field"><label for="planner-founding">Founding partner?</label><select id="planner-founding"><option value="1">No</option><option value="0.7">Yes · 30% off</option></select></div>
+    </div>
+    <p class="planner-helper">Permanent placements are available before launch for tiers 1–5. Title sponsorship cannot be permanent. Additional maps add 0.6× per map for tiers 1–3 and 5.</p>
+  </div>
+  <div class="planner-results">
+    <div class="quote-total"><span>Estimated campaign total</span><strong id="planner-total">$0</strong><small id="planner-range">Select a placement to begin</small></div>
+    <div class="quote-breakdown" id="planner-breakdown"></div>
+  </div>
+  <div class="planner-placement-grid" id="planner-placement-grid"></div>
+  <div class="asset-matrix-wrap">
+    <h3>Client asset &amp; production matrix</h3>
+    <p class="planner-helper">Share this matrix with the client to identify what they can supply and what Kato.8 should produce.</p>
+    <div class="table-wrap"><table class="asset-matrix"><thead><tr><th>Selected placement</th><th>Client supplies</th><th>Kato.8 produces</th><th>Client approvals</th></tr></thead><tbody id="asset-matrix-body"></tbody></table></div>
+  </div>
+  <div class="planner-actions"><button type="button" id="planner-print">Print / Save PDF</button><button type="button" class="secondary" id="planner-copy">Copy campaign brief</button><a class="planner-crm-link" id="planner-crm" href="https://kato-8-crm.vercel.app/" target="_blank" rel="noreferrer">Open in CRM ↗</a></div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var planner = document.getElementById("ad-planner");
+  if (!planner) return;
+  var placements = [
+    {id:"poster", tier:1, name:"Poster / decal", low:1500, high:3000, impl:350, assets:"Logo/vector art, brand colors, legal line", output:"Art adaptation and up to 3 placed instances", approvals:"2 approval rounds"},
+    {id:"video", tier:2, name:"Video screen", low:3000, high:6000, impl:500, assets:"15–30s video, optional audio, captions", output:"Reformatted loop and screen setup", approvals:"Video and audio approval"},
+    {id:"set", tier:3, name:"Branded set-dressing prop", low:5000, high:10000, impl:750, assets:"Logo, product photos, dimensions, materials", output:"3D model, textures, up to 10 instances", approvals:"Model, textures, placement"},
+    {id:"throwable", tier:4, name:"Branded throwable", low:12000, high:25000, impl:1500, assets:"Product references, logo, impact/audio direction", output:"Model, physics, impact sound, gameplay QA", approvals:"Model, sound, gameplay parity"},
+    {id:"hero", tier:5, name:"Interactive hero prop", low:20000, high:40000, impl:2500, assets:"Product references, logo, audio sting, interaction direction", output:"Interactive model, Blueprint, animation, MetaSound", approvals:"Concept, interaction, audio, QA"},
+    {id:"title", tier:6, name:"Title sponsor", low:5000, high:12000, impl:250, assets:"Logo package, brand line, legal approval", output:"Loading-screen UI and logo swap", approvals:"Final loading-screen treatment"}
+  ];
+  var selected = {};
+  var controls = ["planner-term", "planner-maps", "planner-audience", "planner-exclusive", "planner-premium", "planner-founding"];
+  function money(n) { return n.toLocaleString(undefined, {style:"currency", currency:"USD", maximumFractionDigits:0}); }
+  function get(id) { return document.getElementById(id).value; }
+  function activePlacements() { return placements.filter(function (p) { return selected[p.id]; }); }
+  function renderCards() {
+    document.getElementById("planner-placement-grid").innerHTML = placements.map(function (p) {
+      return '<label class="placement-choice' + (selected[p.id] ? ' selected' : '') + '"><input type="checkbox" data-placement="' + p.id + '"' + (selected[p.id] ? ' checked' : '') + '><span class="placement-choice-name">' + p.name + '</span><span class="placement-choice-rate">' + money(p.low) + '–' + money(p.high) + '</span><span class="placement-choice-desc">' + p.assets + '</span></label>';
+    }).join("");
+    planner.querySelectorAll("[data-placement]").forEach(function (input) {
+      input.addEventListener("change", function () { selected[input.dataset.placement] = input.checked; render(); });
+    });
+  }
+  function render() {
+    renderCards();
+    var maps = Number(get("planner-maps"));
+    var term = Number(get("planner-term"));
+    var audience = get("planner-audience") === "custom" ? 1 : Number(get("planner-audience"));
+    var exclusive = Number(get("planner-exclusive"));
+    var premium = Number(get("planner-premium"));
+    var founding = Number(get("planner-founding"));
+    var low = 0, high = 0, impl = 0;
+    activePlacements().forEach(function (p) {
+      var reach = (p.tier === 4 || p.tier === 6) ? 1 : 1 + ((maps - 1) * 0.6);
+      var placementMultiplier = p.tier === 6 ? 1 : exclusive * premium;
+      var campaignLow = p.low * term * reach * placementMultiplier * audience * founding;
+      var campaignHigh = p.high * term * reach * placementMultiplier * audience * founding;
+      low += campaignLow; high += campaignHigh; impl += p.impl;
+    });
+    var totalLow = low + impl, totalHigh = high + impl;
+    document.getElementById("planner-total").textContent = activePlacements().length ? money((totalLow + totalHigh) / 2) : "$0";
+    document.getElementById("planner-range").textContent = activePlacements().length ? money(totalLow) + "–" + money(totalHigh) + " including " + money(impl) + " implementation" : "Select a placement to begin";
+    document.getElementById("planner-breakdown").innerHTML = activePlacements().map(function (p) { return "<div><span>" + p.name + "</span><strong>" + money((p.low + p.high) / 2 * term * ((p.tier === 4 || p.tier === 6) ? 1 : 1 + ((maps - 1) * 0.6)) * (p.tier === 6 ? 1 : exclusive * premium) * audience * founding) + "</strong></div>"; }).join("");
+    document.getElementById("asset-matrix-body").innerHTML = activePlacements().length ? activePlacements().map(function (p) { return "<tr><td><strong>" + p.name + "</strong></td><td>" + p.assets + "</td><td>" + p.output + "</td><td>" + p.approvals + "</td></tr>"; }).join("") : '<tr><td colspan="4">Select placements above to build the client asset matrix.</td></tr>';
+    var crm = new URLSearchParams({scope:activePlacements().map(function (p) { return p.name; }).join(", "), value: activePlacements().length ? String(Math.round((totalLow + totalHigh) / 2)) : "", source:"blind-sight-rate-card"});
+    document.getElementById("planner-crm").href = "https://kato-8-crm.vercel.app/?" + crm.toString();
+  }
+  controls.forEach(function (id) { document.getElementById(id).addEventListener("change", render); });
+  document.getElementById("planner-print").addEventListener("click", function () { window.print(); });
+  document.getElementById("planner-copy").addEventListener("click", async function () {
+    var brief = "Blind Sight campaign brief\nPlacements: " + activePlacements().map(function (p) { return p.name; }).join(", ") + "\nEstimated total: " + document.getElementById("planner-total").textContent + "\nRange: " + document.getElementById("planner-range").textContent + "\nClient assets: " + activePlacements().map(function (p) { return p.assets; }).join("; ");
+    try { await navigator.clipboard.writeText(brief); this.textContent = "Copied"; setTimeout(function () { document.getElementById("planner-copy").textContent = "Copy campaign brief"; }, 1600); } catch (error) { window.alert(brief); }
+  });
+  render();
+}());
+</script>
+
 ## Placement inventory & tiers
 
 | Tier | Placement | What the player experiences | Gameplay link |
