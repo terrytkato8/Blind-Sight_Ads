@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Creative &amp; Asset Guidelines · Blind Sight Brand Partnerships</title>
+<link rel="icon" href="assets/kato8-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --dark:#14151C; --panel:#1E2029; --line:#2E3140; --light:#F2EFE6; --card:#FBF9F4; --rule:#DDD8CC;
+          --acid:#D9F45B; --orange:#B4471F; --muted:#4F4E59; --muted-dark:#A9A8B3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Rubik',Arial,sans-serif; color:var(--dark); background:var(--light); line-height:1.6; }
+  .layout { display:grid; grid-template-columns:290px 1fr; min-height:100vh; }
+  aside { background:var(--dark); color:var(--light); padding:28px 22px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--light); margin-bottom:28px; }
+  .brand img { width:44px; height:44px; }
+  .brand strong { font-family:'Oswald',Arial,sans-serif; font-size:22px; letter-spacing:1px; text-transform:uppercase; display:block; line-height:1.1; }
+  .brand span { font-size:13px; color:var(--muted-dark); }
+  .nav-section { font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--acid); font-weight:600; margin:22px 0 6px; }
+  aside ul { list-style:none; padding:0; margin:0; }
+  aside li a { display:block; padding:6px 10px; border-radius:8px; color:#D6D4CC; text-decoration:none; font-size:15px; }
+  aside li a:hover { background:var(--panel); color:var(--light); }
+  aside li a.active { background:var(--panel); color:var(--acid); font-weight:600; }
+  main { padding:48px 64px 96px; max-width:1100px; }
+  .eyebrow { font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--orange); font-weight:600; margin:0 0 6px; }
+  .toolbar { float:right; }
+  .toolbar button { font:inherit; font-size:14px; background:var(--dark); color:var(--light); border:0; border-radius:8px; padding:8px 14px; cursor:pointer; }
+  h1, h2 { font-family:'Oswald',Arial,sans-serif; text-transform:uppercase; line-height:1.15; }
+  h1 { font-size:44px; margin:0 0 20px; }
+  h2 { font-size:28px; margin:44px 0 14px; padding-top:8px; border-top:2px solid var(--rule); }
+  h3 { font-size:20px; margin:28px 0 10px; }
+  a { color:var(--orange); }
+  .table-wrap { overflow-x:auto; margin:16px 0 24px; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border:1px solid var(--rule); border-radius:12px; overflow:hidden; font-size:15px; }
+  th { background:var(--dark); color:var(--light); text-align:left; font-weight:600; }
+  th, td { padding:10px 14px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+  blockquote { margin:20px 0; padding:14px 18px; background:var(--dark); color:var(--light); border-left:6px solid var(--acid); border-radius:10px; }
+  blockquote a { color:var(--acid); }
+  blockquote p { margin:0; }
+  code { background:#E8E4D8; padding:1px 6px; border-radius:5px; font-size:0.92em; }
+  pre { background:var(--dark); color:#E7E6DF; padding:18px; border-radius:12px; overflow-x:auto; }
+  pre code { background:none; padding:0; color:inherit; }
+  li.task { list-style:none; margin-left:-22px; }
+  hr { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+  .footer { margin-top:64px; font-size:13px; color:var(--muted); border-top:1px solid var(--rule); padding-top:16px; }
+  .menu-btn { display:none; }
+  .generator { display:grid; grid-template-columns:minmax(280px, 360px) minmax(0, 1fr); gap:24px; align-items:start; }
+  .generator-panel, .preview-panel { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px; }
+  .generator-panel { position:sticky; top:24px; }
+  .generator-panel h2, .preview-panel h2 { border:0; margin:0 0 16px; padding:0; font-size:24px; }
+  .field { margin:0 0 14px; }
+  .field label { display:block; font-size:12px; font-weight:600; letter-spacing:.4px; text-transform:uppercase; margin-bottom:5px; }
+  .field input, .field select, .field textarea { width:100%; border:1px solid #C7C1B5; border-radius:7px; background:#fff; color:var(--dark); font:inherit; padding:9px 10px; }
+  .field textarea { min-height:76px; resize:vertical; }
+  .field-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; }
+  .field-grid .field { min-width:0; }
+  .generator-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .generator-actions button { border:0; border-radius:7px; padding:9px 12px; font:inherit; font-weight:600; cursor:pointer; background:var(--dark); color:var(--light); }
+  .generator-actions button.secondary { background:#E8E4D8; color:var(--dark); }
+  .preview-meta { color:var(--muted); font-size:13px; margin:-8px 0 18px; }
+  .document-preview { background:#fff; border:1px solid var(--rule); padding:28px 30px; min-height:520px; white-space:pre-wrap; font-family:Georgia,serif; line-height:1.55; }
+  .document-preview h3 { font-family:'Oswald',Arial,sans-serif; text-transform:uppercase; margin:0 0 8px; font-size:25px; }
+  .document-preview .doc-kicker { color:var(--orange); font:600 12px 'Rubik',Arial,sans-serif; letter-spacing:2px; text-transform:uppercase; }
+  .document-preview .doc-section { font:600 17px 'Rubik',Arial,sans-serif; margin:22px 0 5px; border-bottom:1px solid var(--rule); padding-bottom:3px; }
+  .line-items { border:1px solid var(--rule); border-radius:8px; padding:10px; margin-top:8px; }
+  .line-item { display:grid; grid-template-columns:1fr 110px 34px; gap:7px; align-items:center; margin-bottom:7px; }
+  .line-item:last-child { margin-bottom:0; }
+  .line-item input { width:100%; border:1px solid #C7C1B5; border-radius:5px; padding:7px; font:inherit; }
+  .line-item button { border:0; background:#F2D5CB; color:var(--orange); border-radius:5px; height:32px; cursor:pointer; font-weight:700; }
+  .add-line { margin-top:8px; border:1px dashed #A9A39A; background:transparent; color:var(--orange); border-radius:6px; padding:6px 9px; cursor:pointer; }
+  .helper { color:var(--muted); font-size:12px; margin:4px 0 0; }
+  @media (max-width: 900px) {
+    .generator { grid-template-columns:1fr; }
+    .generator-panel { position:static; }
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns:1fr; }
+    aside { position:static; height:auto; }
+    main { padding:28px 20px 64px; }
+    h1 { font-size:34px; }
+  }
+  @media print {
+      aside, .toolbar, .generator-panel, .preview-meta { display:none; }
+    .layout { display:block; }
+    main { padding:0; max-width:none; }
+    body { background:#fff; }
+    h2 { break-after:avoid; }
+    tr { break-inside:avoid; }
+      .generator { display:block; }
+      .preview-panel { border:0; padding:0; }
+      .document-preview { border:0; padding:0; min-height:0; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <a class="brand" href="index.html">
+    <img src="assets/kato8-icon.png" alt="Kato.8 Studios logo">
+    <div><strong>Blind Sight</strong><span>Brand Partnerships · Kato.8 Studios</span></div>
+  </a>
+  <nav><p class="nav-section">Start</p><ul>
+<li><a href="index.html">Home</a></li>
+</ul>
+<p class="nav-section">Program</p><ul>
+<li><a href="rate-card.html">Rate Card</a></li>
+<li><a href="readiness-plan.html">Executive Readiness Plan</a></li>
+<li><a href="pitch-deck.html">Pitch Deck</a></li>
+</ul>
+<p class="nav-section">Term Sheets</p><ul>
+<li><a href="contributor-ip-term-sheet.html">Contributor IP Term Sheet</a></li>
+<li><a href="sponsor-term-sheet.html">Sponsor Term Sheet</a></li>
+</ul>
+<p class="nav-section">Agreements</p><ul>
+<li><a href="master-sponsorship-agreement.html">Master Sponsorship Agreement</a></li>
+<li><a href="order-form-sow.html">Order Form &amp; SOW</a></li>
+<li><a href="sla.html">Service Level Agreement</a></li>
+</ul>
+<p class="nav-section">Sales</p><ul>
+<li><a href="document-generator.html">Document Generator</a></li>
+<li><a href="rfp-brand-brief.html">RFP &amp; Brand Brief</a></li>
+<li><a href="creative-guidelines.html" class="active">Creative &amp; Asset Guidelines</a></li>
+<li><a href="creator-loi.html">Creator Letter of Intent</a></li>
+</ul>
+<p class="nav-section">Build &amp; Operations</p><ul>
+<li><a href="sponsor-slot-tech-spec.html">Sponsor-Slot Tech Spec</a></li>
+<li><a href="finance-operations.html">Finance Operations</a></li>
+<li><a href="downloads.html">Downloads</a></li>
+</ul></nav>
+</aside>
+<main>
+  <div class="toolbar"><button onclick="window.print()">Print / Save PDF</button></div>
+  <p class="eyebrow">Sales</p>
+  <h1 id="brand-asset-creative-guidelines-schedule-c">Brand Asset &amp; Creative Guidelines (Schedule C)</h1>
+<p>Schedule C to the <a href="master-sponsorship-agreement.html">Master Sponsorship Agreement</a>. The rules every Placement follows and the files we need from the brand.</p>
+<h2 id="creative-rules">Creative rules</h2>
+<ol>
+<li><strong>The game's style comes first.</strong> Brand assets are restyled into Blind Sight's stylized horror-comedy look. Brands approve the result but can't require photoreal art.</li>
+<li><strong>No gameplay advantage, ever.</strong> A branded item behaves exactly like its unbranded version: same physics, weight, throw arc, noise radius, impact loudness, spawn rate and availability. An automated test enforces this in every build.</li>
+<li><strong>No forced engagement.</strong> Players never have to watch, use or interact with a Placement, and are never rewarded for doing so (Steam advertising policy).</li>
+<li><strong>Comedic treatment.</strong> Products can be thrown, dropped, dented, knocked over, hidden behind and used as decoys.</li>
+<li><strong>Off-limits:</strong> the Hunter's weapon, elimination effects, gore, disparaging contexts, and any combination with alcohol, gambling, tobacco, vaping or political messaging.</li>
+<li><strong>One brand per category per map</strong>, unless exclusivity across all maps is purchased.</li>
+<li><strong>Audio stings</strong> fit inside the GDD's loudness range, are distinct from footsteps, doors and the Hunter's gunshot, and never mask gameplay-critical sounds.</li>
+<li><strong>No product claims in game</strong> ("#1", "healthiest", prices, promotions). Logos, product shapes and brand colors only.</li>
+</ol>
+<h2 id="asset-intake-spec-from-the-brand">Asset intake spec (from the brand)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Format</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary logo</td>
+<td>SVG or AI (vector), plus PNG at 4096 px with transparency</td>
+<td>Full-color, single-color and reversed</td>
+</tr>
+<tr>
+<td>Brand colors</td>
+<td>HEX/RGB values</td>
+<td>Primary and secondary</td>
+</tr>
+<tr>
+<td>Product photos</td>
+<td>JPG/PNG, 2048 px or larger, front, side, back and top</td>
+<td>For 3D modeling</td>
+</tr>
+<tr>
+<td>Product dimensions</td>
+<td>mm or inches</td>
+<td>Real-world scale</td>
+</tr>
+<tr>
+<td>Packaging dielines</td>
+<td>PDF/AI</td>
+<td>Optional; speeds up texturing</td>
+</tr>
+<tr>
+<td>Video (video screens only)</td>
+<td>MP4 H.264, 1920×1080, 15–30 seconds</td>
+<td>Looping, no on-screen URLs or prices</td>
+</tr>
+<tr>
+<td>Audio sting (interactive props only)</td>
+<td>WAV, 48 kHz, 24-bit, 1–3 seconds</td>
+<td>May be re-pitched or mixed to fit</td>
+</tr>
+<tr>
+<td>Brand guidelines</td>
+<td>PDF</td>
+<td>Including clear space and misuse rules</td>
+</tr>
+<tr>
+<td>Mandatory legal lines</td>
+<td>Text</td>
+<td>E.g. trademark notices for the credits</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="studio-technical-budgets">Studio technical budgets</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Placement</th>
+<th>Triangle budget</th>
+<th>Textures</th>
+<th>Audio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Throwable</td>
+<td>1.5k–3k tris, 3 LODs</td>
+<td>1× 1024 set</td>
+<td>Impact set inherited from the base class</td>
+</tr>
+<tr>
+<td>Set-dressing prop</td>
+<td>2k–8k tris, 3 LODs</td>
+<td>1× 1024–2048 set</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Interactive prop</td>
+<td>8k–20k tris, 3 LODs</td>
+<td>Up to 2× 2048 sets</td>
+<td>Brand sting + interaction sounds</td>
+</tr>
+<tr>
+<td>Poster / decal</td>
+<td>Decal or plane</td>
+<td>1× 2048</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Video screen</td>
+<td>Existing screen mesh</td>
+<td>Media texture, 1080p</td>
+<td>Optional, attenuated</td>
+</tr>
+<tr>
+<td>Title sponsor</td>
+<td>UI (UMG)</td>
+<td>Logo at 1024 px</td>
+<td>None</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="approval-submissions-from-the-studio">Approval submissions (from the studio)</h2>
+<p>Each round: three rendered stills (hero, in-context, gameplay angle) and a 10–20 second in-engine capture. Feedback is consolidated by the named approver, one list per round.</p>
+  <p class="footer">Kato.8 Studios LLC · Hollywood, California · Confidential working drafts. Legal documents require review by a licensed attorney before use.</p>
+</main>
+</div>
+</body>
+</html>
