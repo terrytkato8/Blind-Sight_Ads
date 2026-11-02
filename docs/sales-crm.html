@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sales CRM · Blind Sight Brand Partnerships</title>
+<link rel="icon" href="assets/kato8-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --dark:#14151C; --panel:#1E2029; --line:#2E3140; --light:#F2EFE6; --card:#FBF9F4; --rule:#DDD8CC;
+          --acid:#D9F45B; --orange:#B4471F; --muted:#4F4E59; --muted-dark:#A9A8B3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Rubik',Arial,sans-serif; color:var(--dark); background:var(--light); line-height:1.6; }
+  .layout { display:grid; grid-template-columns:290px 1fr; min-height:100vh; }
+  aside { background:var(--dark); color:var(--light); padding:28px 22px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--light); margin-bottom:28px; }
+  .brand img { width:44px; height:44px; }
+  .brand strong { font-family:'Oswald',Arial,sans-serif; font-size:22px; letter-spacing:1px; text-transform:uppercase; display:block; line-height:1.1; }
+  .brand span { font-size:13px; color:var(--muted-dark); }
+  .nav-section { font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--acid); font-weight:600; margin:22px 0 6px; }
+  aside ul { list-style:none; padding:0; margin:0; }
+  aside li a { display:block; padding:6px 10px; border-radius:8px; color:#D6D4CC; text-decoration:none; font-size:15px; }
+  aside li a:hover { background:var(--panel); color:var(--light); }
+  aside li a.active { background:var(--panel); color:var(--acid); font-weight:600; }
+  main { padding:48px 64px 96px; max-width:1100px; }
+  .eyebrow { font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--orange); font-weight:600; margin:0 0 6px; }
+  .toolbar { float:right; }
+  .toolbar button { font:inherit; font-size:14px; background:var(--dark); color:var(--light); border:0; border-radius:8px; padding:8px 14px; cursor:pointer; }
+  h1, h2 { font-family:'Oswald',Arial,sans-serif; text-transform:uppercase; line-height:1.15; }
+  h1 { font-size:44px; margin:0 0 20px; }
+  h2 { font-size:28px; margin:44px 0 14px; padding-top:8px; border-top:2px solid var(--rule); }
+  h3 { font-size:20px; margin:28px 0 10px; }
+  a { color:var(--orange); }
+  .table-wrap { overflow-x:auto; margin:16px 0 24px; }
+  table { border-collapse:collapse; width:100%; background:var(--card); border:1px solid var(--rule); border-radius:12px; overflow:hidden; font-size:15px; }
+  th { background:var(--dark); color:var(--light); text-align:left; font-weight:600; }
+  th, td { padding:10px 14px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+  blockquote { margin:20px 0; padding:14px 18px; background:var(--dark); color:var(--light); border-left:6px solid var(--acid); border-radius:10px; }
+  blockquote a { color:var(--acid); }
+  blockquote p { margin:0; }
+  code { background:#E8E4D8; padding:1px 6px; border-radius:5px; font-size:0.92em; }
+  pre { background:var(--dark); color:#E7E6DF; padding:18px; border-radius:12px; overflow-x:auto; }
+  pre code { background:none; padding:0; color:inherit; }
+  li.task { list-style:none; margin-left:-22px; }
+  hr { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+  .footer { margin-top:64px; font-size:13px; color:var(--muted); border-top:1px solid var(--rule); padding-top:16px; }
+  .menu-btn { display:none; }
+  .generator { display:grid; grid-template-columns:minmax(280px, 360px) minmax(0, 1fr); gap:24px; align-items:start; }
+  .generator-panel, .preview-panel { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px; }
+  .generator-panel { position:sticky; top:24px; }
+  .generator-panel h2, .preview-panel h2 { border:0; margin:0 0 16px; padding:0; font-size:24px; }
+  .field { margin:0 0 14px; }
+  .field label { display:block; font-size:12px; font-weight:600; letter-spacing:.4px; text-transform:uppercase; margin-bottom:5px; }
+  .field input, .field select, .field textarea { width:100%; border:1px solid #C7C1B5; border-radius:7px; background:#fff; color:var(--dark); font:inherit; padding:9px 10px; }
+  .field textarea { min-height:76px; resize:vertical; }
+  .field-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; }
+  .field-grid .field { min-width:0; }
+  .generator-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .generator-actions button { border:0; border-radius:7px; padding:9px 12px; font:inherit; font-weight:600; cursor:pointer; background:var(--dark); color:var(--light); }
+  .generator-actions button.secondary { background:#E8E4D8; color:var(--dark); }
+  .preview-meta { color:var(--muted); font-size:13px; margin:-8px 0 18px; }
+  .document-preview { background:#fff; border:1px solid var(--rule); padding:28px 30px; min-height:520px; white-space:pre-wrap; font-family:Georgia,serif; line-height:1.55; }
+  .document-preview h3 { font-family:'Oswald',Arial,sans-serif; text-transform:uppercase; margin:0 0 8px; font-size:25px; }
+  .document-preview .doc-kicker { color:var(--orange); font:600 12px 'Rubik',Arial,sans-serif; letter-spacing:2px; text-transform:uppercase; }
+  .document-preview .doc-section { font:600 17px 'Rubik',Arial,sans-serif; margin:22px 0 5px; border-bottom:1px solid var(--rule); padding-bottom:3px; }
+  .line-items { border:1px solid var(--rule); border-radius:8px; padding:10px; margin-top:8px; }
+  .line-item { display:grid; grid-template-columns:1fr 110px 34px; gap:7px; align-items:center; margin-bottom:7px; }
+  .line-item:last-child { margin-bottom:0; }
+  .line-item input { width:100%; border:1px solid #C7C1B5; border-radius:5px; padding:7px; font:inherit; }
+  .line-item button { border:0; background:#F2D5CB; color:var(--orange); border-radius:5px; height:32px; cursor:pointer; font-weight:700; }
+  .add-line { margin-top:8px; border:1px dashed #A9A39A; background:transparent; color:var(--orange); border-radius:6px; padding:6px 9px; cursor:pointer; }
+  .helper { color:var(--muted); font-size:12px; margin:4px 0 0; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .crm-toolbar { display:flex; gap:12px; justify-content:space-between; align-items:center; margin:18px 0; }
+  .crm-toolbar > div:first-child { flex:1; max-width:420px; }
+  .crm-toolbar input, .crm-toolbar select, .crm-list-heading select { border:1px solid #C7C1B5; border-radius:7px; background:#fff; color:var(--dark); font:inherit; padding:9px 10px; }
+  .crm-toolbar input { width:100%; }
+  .crm-actions, .crm-form-actions { display:flex; flex-wrap:wrap; gap:8px; }
+  .crm-actions button, .crm-form-actions button, .crm-empty button { border:0; border-radius:7px; padding:9px 12px; font:inherit; font-weight:600; cursor:pointer; background:var(--dark); color:var(--light); }
+  .crm-actions button.secondary, .crm-form-actions button.secondary { background:#E8E4D8; color:var(--dark); }
+  .crm-summary { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin:16px 0 22px; }
+  .crm-summary div { background:var(--dark); color:var(--light); border-radius:10px; padding:14px; }
+  .crm-summary strong, .crm-summary span { display:block; }
+  .crm-summary strong { color:var(--acid); font:600 23px 'Oswald',Arial,sans-serif; }
+  .crm-summary span { color:var(--muted-dark); font-size:12px; text-transform:uppercase; letter-spacing:.8px; }
+  .crm-layout { display:grid; grid-template-columns:minmax(260px, .75fr) minmax(0, 1.25fr); gap:18px; align-items:start; }
+  .crm-list-panel, .crm-editor-panel { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:18px; }
+  .crm-list-heading { display:flex; justify-content:space-between; gap:8px; align-items:center; margin-bottom:12px; }
+  .crm-list-heading h2, .crm-editor-panel h2, .crm-empty h2 { border:0; padding:0; margin:0; font-size:24px; }
+  .client-list { display:grid; gap:8px; }
+  .client-card { text-align:left; width:100%; border:1px solid var(--rule); background:#fff; border-radius:9px; padding:12px; cursor:pointer; font:inherit; color:var(--dark); }
+  .client-card:hover, .client-card.selected { border-color:var(--orange); box-shadow:0 0 0 2px #F2D5CB; }
+  .client-card-top, .client-card-bottom { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+  .client-card-contact, .client-card-bottom { display:block; color:var(--muted); font-size:12px; margin-top:5px; }
+  .client-card-bottom { display:flex; }
+  .stage-pill { border-radius:20px; padding:2px 7px; font-size:11px; font-weight:600; }
+  .stage-lead { background:#E8E4D8; } .stage-qualified { background:#DCE8F5; } .stage-proposal { background:#F8E3B0; }
+  .stage-negotiation { background:#E8D8F4; } .stage-won { background:#D9F45B; } .stage-lost { background:#F2D5CB; }
+  .no-records, .crm-empty { text-align:center; color:var(--muted); padding:36px 12px; }
+  .no-records button { border:0; background:none; color:var(--orange); cursor:pointer; font:inherit; font-weight:600; }
+  .editor-heading { display:flex; justify-content:space-between; align-items:start; margin-bottom:22px; }
+  .danger-button { border:1px solid #D4A394; color:var(--orange); background:#FBEDE8; border-radius:6px; padding:7px 10px; cursor:pointer; }
+  .crm-field-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
+  .crm-field-grid .field { min-width:0; }
+  .crm-field-grid .crm-wide { grid-column:1 / -1; }
+  .crm-form-actions { margin-top:4px; }
+  @media (max-width: 900px) {
+    .generator { grid-template-columns:1fr; }
+    .generator-panel { position:static; }
+    .crm-layout { grid-template-columns:1fr; }
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns:1fr; }
+    aside { position:static; height:auto; }
+    main { padding:28px 20px 64px; }
+    h1 { font-size:34px; }
+  }
+  @media print {
+      aside, .toolbar, .generator-panel, .preview-meta { display:none; }
+    .layout { display:block; }
+    main { padding:0; max-width:none; }
+    body { background:#fff; }
+    h2 { break-after:avoid; }
+    tr { break-inside:avoid; }
+      .generator { display:block; }
+      .preview-panel { border:0; padding:0; }
+      .document-preview { border:0; padding:0; min-height:0; }
+      .crm-toolbar, .crm-summary, .crm-layout { display:none; }
+    }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <a class="brand" href="index.html">
+    <img src="assets/kato8-icon.png" alt="Kato.8 Studios logo">
+    <div><strong>Blind Sight</strong><span>Brand Partnerships · Kato.8 Studios</span></div>
+  </a>
+  <nav><p class="nav-section">Start</p><ul>
+<li><a href="index.html">Home</a></li>
+</ul>
+<p class="nav-section">Program</p><ul>
+<li><a href="rate-card.html">Rate Card</a></li>
+<li><a href="readiness-plan.html">Executive Readiness Plan</a></li>
+<li><a href="pitch-deck.html">Pitch Deck</a></li>
+</ul>
+<p class="nav-section">Term Sheets</p><ul>
+<li><a href="contributor-ip-term-sheet.html">Contributor IP Term Sheet</a></li>
+<li><a href="sponsor-term-sheet.html">Sponsor Term Sheet</a></li>
+</ul>
+<p class="nav-section">Agreements</p><ul>
+<li><a href="master-sponsorship-agreement.html">Master Sponsorship Agreement</a></li>
+<li><a href="order-form-sow.html">Order Form &amp; SOW</a></li>
+<li><a href="sla.html">Service Level Agreement</a></li>
+</ul>
+<p class="nav-section">Sales</p><ul>
+<li><a href="document-generator.html">Document Generator</a></li>
+<li><a href="rfp-brand-brief.html">RFP &amp; Brand Brief</a></li>
+<li><a href="sales-crm.html" class="active">Sales CRM</a></li>
+<li><a href="creative-guidelines.html">Creative &amp; Asset Guidelines</a></li>
+<li><a href="creator-loi.html">Creator Letter of Intent</a></li>
+</ul>
+<p class="nav-section">Build &amp; Operations</p><ul>
+<li><a href="sponsor-slot-tech-spec.html">Sponsor-Slot Tech Spec</a></li>
+<li><a href="finance-operations.html">Finance Operations</a></li>
+<li><a href="downloads.html">Downloads</a></li>
+</ul></nav>
+</aside>
+<main>
+  <div class="toolbar"><button onclick="window.print()">Print / Save PDF</button></div>
+  <p class="eyebrow">Sales</p>
+  <h1 id="sales-client-crm">Sales &amp; Client CRM</h1>
+<p>Track prospective sponsors and active clients alongside the deal documents. Records are saved in this browser only. Use <strong>Export backup</strong> regularly and keep the JSON file somewhere secure; importing replaces the current browser data.</p>
+<div class="crm-app" id="sales-crm">
+  <section class="crm-toolbar" aria-label="CRM controls">
+    <div>
+      <label class="sr-only" for="crm-search">Search clients</label>
+      <input id="crm-search" placeholder="Search company, contact, notes...">
+    </div>
+    <div class="crm-actions">
+      <button type="button" id="new-client">+ New client</button>
+      <button type="button" class="secondary" id="export-crm">Export backup</button>
+      <button type="button" class="secondary" id="import-crm">Import backup</button>
+      <input type="file" id="import-file" accept="application/json" hidden>
+    </div>
+  </section>
+  <section class="crm-summary" id="crm-summary"></section>
+  <div class="crm-layout">
+    <section class="crm-list-panel">
+      <div class="crm-list-heading">
+        <h2>Pipeline</h2>
+        <select id="stage-filter" aria-label="Filter by pipeline stage">
+          <option value="all">All stages</option>
+          <option>Lead</option>
+          <option>Qualified</option>
+          <option>Proposal</option>
+          <option>Negotiation</option>
+          <option>Won</option>
+          <option>Lost</option>
+        </select>
+      </div>
+      <div id="client-list" class="client-list"></div>
+    </section>
+    <section class="crm-editor-panel">
+      <div id="empty-editor" class="crm-empty">
+        <h2>Build your pipeline</h2>
+        <p>Create a client record to track contacts, pricing, next steps, and the documents you generate for each opportunity.</p>
+        <button type="button" id="empty-new-client">Create first client</button>
+      </div>
+      <form id="client-editor" hidden>
+        <div class="editor-heading">
+          <div>
+            <p class="eyebrow">Client record</p>
+            <h2 id="editor-title">New client</h2>
+          </div>
+          <button type="button" class="danger-button" id="delete-client">Delete</button>
+        </div>
+        <div class="crm-field-grid">
+          <div class="field"><label for="client-company">Company</label><input id="client-company" required placeholder="Acme, Inc."></div>
+          <div class="field"><label for="client-contact">Primary contact</label><input id="client-contact" placeholder="Name, title"></div>
+          <div class="field"><label for="client-email">Email</label><input id="client-email" type="email" placeholder="name@company.com"></div>
+          <div class="field"><label for="client-stage">Stage</label><select id="client-stage"><option>Lead</option><option>Qualified</option><option>Proposal</option><option>Negotiation</option><option>Won</option><option>Lost</option></select></div>
+          <div class="field"><label for="client-value">Estimated deal value (USD)</label><input id="client-value" type="number" min="0" step="100" placeholder="25000"></div>
+          <div class="field"><label for="client-next-date">Next action date</label><input id="client-next-date" type="date"></div>
+          <div class="field crm-wide"><label for="client-next-action">Next action</label><input id="client-next-action" placeholder="Send sponsor term sheet"></div>
+          <div class="field crm-wide"><label for="client-scope">Opportunity / placements</label><textarea id="client-scope" placeholder="Branded throwable, interactive prop, title sponsor..."></textarea></div>
+          <div class="field crm-wide"><label for="client-notes">Notes</label><textarea id="client-notes" placeholder="Budget, decision process, brand restrictions, follow-ups..."></textarea></div>
+        </div>
+        <div class="crm-form-actions"><button type="submit">Save client</button><button type="button" class="secondary" id="cancel-edit">Cancel</button></div>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var app = document.getElementById("sales-crm");
+  if (!app) return;
+  var STORAGE_KEY = "blind-sight-sales-crm-v1";
+  var stages = ["Lead", "Qualified", "Proposal", "Negotiation", "Won", "Lost"];
+  var records = [];
+  var selectedId = null;
+  var search = document.getElementById("crm-search");
+  var stageFilter = document.getElementById("stage-filter");
+  var list = document.getElementById("client-list");
+  var summary = document.getElementById("crm-summary");
+  var editor = document.getElementById("client-editor");
+  var empty = document.getElementById("empty-editor");
+  var formFields = {
+    company: document.getElementById("client-company"),
+    contact: document.getElementById("client-contact"),
+    email: document.getElementById("client-email"),
+    stage: document.getElementById("client-stage"),
+    value: document.getElementById("client-value"),
+    nextDate: document.getElementById("client-next-date"),
+    nextAction: document.getElementById("client-next-action"),
+    scope: document.getElementById("client-scope"),
+    notes: document.getElementById("client-notes")
+  };
+  function escapeHtml(text) {
+    return String(text || "").replace(/[&<>"']/g, function (character) {
+      return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[character];
+    });
+  }
+  function load() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      records = Array.isArray(saved) ? saved : [];
+    } catch (error) {
+      records = [];
+    }
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+  function money(amount) {
+    return Number(amount || 0).toLocaleString(undefined, {style: "currency", currency: "USD", maximumFractionDigits: 0});
+  }
+  function dateLabel(date) {
+    if (!date) return "No next action date";
+    var parsed = new Date(date + "T00:00:00");
+    return isNaN(parsed.getTime()) ? date : parsed.toLocaleDateString();
+  }
+  function filteredRecords() {
+    var query = search.value.trim().toLowerCase();
+    return records.filter(function (record) {
+      var matchesStage = stageFilter.value === "all" || record.stage === stageFilter.value;
+      var haystack = [record.company, record.contact, record.email, record.scope, record.notes, record.nextAction].join(" ").toLowerCase();
+      return matchesStage && (!query || haystack.indexOf(query) !== -1);
+    }).sort(function (a, b) { return (a.nextDate || "9999").localeCompare(b.nextDate || "9999"); });
+  }
+  function renderSummary() {
+    var active = records.filter(function (record) { return record.stage !== "Lost" && record.stage !== "Won"; });
+    var pipeline = active.reduce(function (total, record) { return total + Number(record.value || 0); }, 0);
+    var won = records.filter(function (record) { return record.stage === "Won"; }).reduce(function (total, record) { return total + Number(record.value || 0); }, 0);
+    summary.innerHTML = '<div><strong>' + records.length + '</strong><span>Total clients</span></div>' +
+      '<div><strong>' + money(pipeline) + '</strong><span>Open pipeline</span></div>' +
+      '<div><strong>' + money(won) + '</strong><span>Won value</span></div>' +
+      '<div><strong>' + active.filter(function (record) { return record.nextDate && record.nextDate < new Date().toISOString().slice(0, 10); }).length + '</strong><span>Overdue actions</span></div>';
+  }
+  function renderList() {
+    var visible = filteredRecords();
+    list.innerHTML = visible.length ? visible.map(function (record) {
+      return '<button type="button" class="client-card' + (record.id === selectedId ? " selected" : "") + '" data-id="' + escapeHtml(record.id) + '">' +
+        '<span class="client-card-top"><strong>' + escapeHtml(record.company || "Unnamed client") + '</strong><span class="stage-pill stage-' + record.stage.toLowerCase() + '">' + escapeHtml(record.stage) + '</span></span>' +
+        '<span class="client-card-contact">' + escapeHtml(record.contact || "No contact") + '</span>' +
+        '<span class="client-card-bottom"><span>' + money(record.value) + '</span><span>' + escapeHtml(record.nextAction || dateLabel(record.nextDate)) + '</span></span></button>';
+    }).join("") : '<div class="no-records">No matching clients yet.<br><button type="button" id="no-records-new">Add a client</button></div>';
+    list.querySelectorAll("[data-id]").forEach(function (button) {
+      button.addEventListener("click", function () { select(button.getAttribute("data-id")); });
+    });
+    var emptyButton = document.getElementById("no-records-new");
+    if (emptyButton) emptyButton.addEventListener("click", newClient);
+  }
+  function render() {
+    renderSummary();
+    renderList();
+    if (selectedId) {
+      var selected = records.find(function (record) { return record.id === selectedId; });
+      if (selected) {
+        empty.hidden = true;
+        editor.hidden = false;
+        document.getElementById("editor-title").textContent = selected.company || "Edit client";
+        Object.keys(formFields).forEach(function (key) { formFields[key].value = selected[key] || ""; });
+        return;
+      }
+    }
+    empty.hidden = false;
+    editor.hidden = true;
+  }
+  function select(id) {
+    selectedId = id;
+    render();
+  }
+  function newClient() {
+    var id = "client-" + Date.now();
+    records.push({id: id, company: "", contact: "", email: "", stage: "Lead", value: "", nextDate: "", nextAction: "", scope: "", notes: ""});
+    selectedId = id;
+    save();
+    render();
+    formFields.company.focus();
+  }
+  editor.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var record = records.find(function (item) { return item.id === selectedId; });
+    if (!record) return;
+    Object.keys(formFields).forEach(function (key) { record[key] = formFields[key].value.trim(); });
+    save();
+    render();
+  });
+  document.getElementById("new-client").addEventListener("click", newClient);
+  document.getElementById("empty-new-client").addEventListener("click", newClient);
+  document.getElementById("cancel-edit").addEventListener("click", function () { selectedId = null; render(); });
+  document.getElementById("delete-client").addEventListener("click", function () {
+    if (!selectedId || !window.confirm("Delete this client record?")) return;
+    records = records.filter(function (record) { return record.id !== selectedId; });
+    selectedId = null;
+    save();
+    render();
+  });
+  search.addEventListener("input", renderList);
+  stageFilter.addEventListener("change", renderList);
+  document.getElementById("export-crm").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(records, null, 2)], {type: "application/json"});
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "blind-sight-sales-crm-" + new Date().toISOString().slice(0, 10) + ".json";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+  document.getElementById("import-crm").addEventListener("click", function () { document.getElementById("import-file").click(); });
+  document.getElementById("import-file").addEventListener("change", function (event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var imported = JSON.parse(reader.result);
+        if (!Array.isArray(imported)) throw new Error("Backup must be an array.");
+        records = imported;
+        selectedId = null;
+        save();
+        render();
+      } catch (error) {
+        window.alert("Could not import that backup. Please choose a CRM JSON export.");
+      }
+      event.target.value = "";
+    };
+    reader.readAsText(file);
+  });
+  load();
+  render();
+}());
+</script>
+  <p class="footer">Kato.8 Studios LLC · Hollywood, California · Confidential working drafts. Legal documents require review by a licensed attorney before use.</p>
+</main>
+</div>
+</body>
+</html>

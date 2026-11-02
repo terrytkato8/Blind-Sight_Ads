@@ -1,6 +1,6 @@
 # Blind Sight — Brand Partnerships Hub
 
-A static site holding the in-game advertising and product placement program for **Blind Sight** (Kato.8 Studios LLC): rate card, pitch deck, readiness plan, term sheets, agreements, SLA, RFP, creative guidelines, creator LOI, the Unreal sponsor-slot spec, finance operations and downloadable spreadsheets.
+A static site holding the in-game advertising and product placement program for **Blind Sight** (Kato.8 Studios LLC): rate card, pitch deck, readiness plan, term sheets, agreements, SLA, RFP, creative guidelines, creator LOI, the Unreal sponsor-slot spec, finance operations, a browser-based sales CRM and downloadable spreadsheets.
 
 > Confidential working drafts. Legal documents need review by a licensed California attorney before use; finance guidance needs a CPA.
 
@@ -26,6 +26,8 @@ order: 1
 
 Sections, in sidebar order: Start, Program, Term Sheets, Agreements, Sales, Build & Operations.
 
+The Sales CRM stores client records in the browser's local storage. Use its Export backup button to create a portable JSON backup before changing devices or clearing browser data. It does not provide shared team access or server-side storage.
+
 ## Editing
 
 ```bash
@@ -34,6 +36,14 @@ python3 build.py
 ```
 
 Commit both `site/` and the regenerated `docs/`.
+
+## Publishing with Vercel
+
+The static output can be deployed to Vercel from `docs/`:
+
+```bash
+npx vercel docs --prod
+```
 
 ## Publishing with GitHub Pages
 
